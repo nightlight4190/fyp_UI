@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/FutsalOwner/OwnerViewBoking.dart';
+import 'package:fyp/FutsalOwner/fusalDetails.dart';
 import 'package:fyp/changePassword.dart';
 import 'package:fyp/FutsalOwner/addFutsalCourt.dart';
 
@@ -46,6 +47,18 @@ class _FutsalOwnerSettingsPageState extends State<FutsalOwnerSettingsPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const AddFutsalCourtPage(),
+                    ),
+                  );
+                },
+              ),
+              SettingsListTile(
+                title: "View Futsal Details",
+                icon: Icons.info_outline,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FutsalDetailsPage(),
                     ),
                   );
                 },

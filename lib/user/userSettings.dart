@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fyp/user/bookingHistory.dart';
+import 'package:fyp/FutsalOwner/OwnerSettings.dart';
 import 'package:fyp/changePassword.dart';
+import 'package:fyp/user/bookingHistory.dart';
 import 'package:fyp/user/bookings.dart';
+import 'package:fyp/user/currentlyBooked.dart';
 
 class UserSettingsPage extends StatefulWidget {
   const UserSettingsPage({super.key});
@@ -61,7 +63,19 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             sectionTitle: "Booking Management",
             items: [
               SettingsListTile(
-                title: "Bookings",
+                title: "My Bookings",
+                icon: Icons.bookmark_added,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CurrentlyBookedPage(),
+                    ),
+                  );
+                },
+              ),
+              SettingsListTile(
+                title: "Book Futsal",
                 icon: Icons.schedule,
                 onTap: () {
                   Navigator.push(
@@ -204,105 +218,9 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
 
   // Function to handle logout logic
   void _logout() {
-    // Add your logout logic here, e.g., clearing the user session, navigating to the login screen, etc.
     Navigator.pushReplacementNamed(
       context,
       "/login",
     ); // Example: Navigate to login screen
-  }
-}
-
-class UserHeader extends StatelessWidget {
-  final String name;
-  final String email;
-  final String avatarUrl;
-
-  const UserHeader({
-    super.key,
-    required this.name,
-    required this.email,
-    required this.avatarUrl,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        CircleAvatar(radius: 50, backgroundImage: NetworkImage(avatarUrl)),
-        const SizedBox(height: 10),
-        Text(
-          name,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        Text(email, style: const TextStyle(fontSize: 16, color: Colors.grey)),
-      ],
-    );
-  }
-}
-
-class SettingsSection extends StatelessWidget {
-  final String sectionTitle;
-  final List<Widget> items;
-
-  const SettingsSection({
-    super.key,
-    required this.sectionTitle,
-    required this.items,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 5, top: 15),
-          child: Text(
-            sectionTitle,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.green,
-            ),
-          ),
-        ),
-        Column(children: items),
-        Divider(thickness: 1, color: Colors.grey.shade300),
-      ],
-    );
-  }
-}
-
-class SettingsListTile extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final VoidCallback onTap;
-
-  const SettingsListTile({
-    super.key,
-    required this.title,
-    required this.icon,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.green),
-      title: Text(
-        title,
-        style: const TextStyle(fontSize: 16, color: Colors.black87),
-      ),
-      trailing: const Icon(
-        Icons.arrow_forward_ios,
-        size: 16,
-        color: Colors.grey,
-      ),
-      onTap: onTap,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      tileColor: Colors.grey.shade100,
-      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-    );
   }
 }
